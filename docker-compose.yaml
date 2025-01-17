@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: restaurant-management-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    volumes:
+      - restaurant-management-db:/var/lib/postgresql/data
+
+volumes:
+  restaurant-management-db:
