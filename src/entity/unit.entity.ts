@@ -2,16 +2,18 @@ import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './base/base.entity';
 import { RecipeIngredient } from './recipe-ingredient.entity';
 import { RecipeRecipe } from './recipe-recipe.entity';
+import { IsNotEmpty } from 'class-validator';
 
 @Entity('units')
 export class Unit extends BaseEntity {
   @Column()
+  @IsNotEmpty()
   name: string;
 
   @Column()
   displayName: string;
 
-  @Column()
+  @Column('float', { nullable: true })
   ratio: number;
 
   @ManyToOne(() => Unit, (unit) => unit.childUnits, { nullable: true })

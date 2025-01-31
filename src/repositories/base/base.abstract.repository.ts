@@ -1,4 +1,4 @@
-import { DeepPartial, FindOptionsWhere, Repository } from 'typeorm';
+import { DeepPartial, FindManyOptions, FindOptionsWhere, Repository } from 'typeorm';
 import { IBaseRepository } from './base.interface.repository';
 
 interface HasId {
@@ -12,8 +12,8 @@ export abstract class BaseRepository<T extends HasId> implements IBaseRepository
     return this.repository.save(entity);
   }
 
-  async findAll(): Promise<T[]> {
-    return this.repository.find();
+  async findAll(options?: FindManyOptions<T>): Promise<T[]> {
+    return this.repository.find(options);
   }
 
   async findOneById(id: string): Promise<T> {
