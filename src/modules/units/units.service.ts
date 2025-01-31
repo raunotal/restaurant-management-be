@@ -17,14 +17,15 @@ export class UnitsService {
   async create(createUnitDto: CreateUnitDto) {
     this.logger.log(`Creating unit ${createUnitDto.name}`, { createUnitDto });
 
-    const unit = new Unit(createUnitDto);
+    const parentUnit = await this.unitsRepository.findOneById(createUnitDto.parentUnitId);
+    const unit = new Unit({ ...createUnitDto, parentUnit });
     return await this.unitsRepository.create(unit);
   }
 
   async findAll() {
     this.logger.log('Finding all units');
 
-    return await this.unitsRepository.findAll();
+    return await this.unitsRepository.findAll({ relations: ['parentUnit'] });
   }
 
   async findOneById(id: string) {
