@@ -28,7 +28,7 @@ export class UnitsService {
     return await this.unitsRepository.findAll({ relations: ['parentUnit'] });
   }
 
-  async findOneById(id: string) {
+  async findOne(id: string) {
     this.logger.log(`Finding unit ${id}`);
 
     return await this.unitsRepository.findOneById(id);

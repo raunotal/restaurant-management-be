@@ -19,7 +19,7 @@ export class UnitsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.unitsService.findOneById(id);
+    return await this.unitsService.findOne(id);
   }
 
   @Patch(':id')

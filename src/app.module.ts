@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { RecipeCategoriesModule } from './modules/recipe-categories/recipe-categories.module';
 import { UnitsModule } from './modules/units/units.module';
+import { SuppliersModule } from './modules/suppliers/suppliers.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UnitsModule } from './modules/units/units.module';
     DatabaseModule,
     UnitsModule,
     RecipeCategoriesModule,
+    SuppliersModule,
   ],
   controllers: [],
   providers: [],
