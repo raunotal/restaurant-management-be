@@ -5,6 +5,7 @@ import { RecipeCategoriesModule } from './modules/recipe-categories/recipe-categ
 import { UnitsModule } from './modules/units/units.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { IngredientCategoriesModule } from './modules/ingredient-categories/ingredient-categories.module';
+import { RecipeModule } from './modules/recipes/recipes.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { IngredientCategoriesModule } from './modules/ingredient-categories/ingr
     RecipeCategoriesModule,
     SuppliersModule,
     IngredientCategoriesModule,
+    RecipeModule,
   ],
   controllers: [],
   providers: [],

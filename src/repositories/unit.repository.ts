@@ -5,11 +5,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class UnitsRepository extends BaseRepository<Unit> {
+export class UnitRepository extends BaseRepository<Unit> {
   constructor(
     @InjectRepository(Unit)
-    private readonly UnitRepository: Repository<Unit>
+    private readonly unitRepository: Repository<Unit>
   ) {
-    super(UnitRepository);
+    super(unitRepository);
   }
 }
