@@ -5,11 +5,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class RecipeCategoriesRepository extends BaseRepository<RecipeCategory> {
+export class RecipeCategoryRepository extends BaseRepository<RecipeCategory> {
   constructor(
     @InjectRepository(RecipeCategory)
-    private readonly RecipeCategory: Repository<RecipeCategory>
+    private readonly recipeCategoryRepository: Repository<RecipeCategory>
   ) {
-    super(RecipeCategory);
+    super(recipeCategoryRepository);
   }
 }

@@ -1,16 +1,16 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { CreateRecipeCategoryDto } from './dto/create-recipe-category.dto';
 import { UpdateRecipeCategoryDto } from './dto/update-recipe-category.dto';
-import { RecipeCategoriesRepository } from 'src/repositories/recipe-categories.repository';
-import { IRecipeCategoriesRepository } from 'src/repositories/interfaces/recipe-category.interface';
+import { RecipeCategoryRepository } from 'src/repositories/recipe-category.repository';
+import { IRecipeCategoryRepository } from 'src/repositories/interfaces/recipe-category.interface';
 
 @Injectable()
 export class RecipeCategoriesService {
   private readonly logger: Logger = new Logger(RecipeCategoriesService.name);
 
   constructor(
-    @Inject(RecipeCategoriesRepository.name)
-    private readonly recipeCategoryRepository: IRecipeCategoriesRepository
+    @Inject(RecipeCategoryRepository)
+    private readonly recipeCategoryRepository: IRecipeCategoryRepository
   ) {}
 
   async create(createRecipeCategoryDto: CreateRecipeCategoryDto) {
