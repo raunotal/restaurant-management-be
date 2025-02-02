@@ -7,6 +7,9 @@ export class RecipeCategory extends BaseEntity {
   @Column()
   name: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @OneToMany(() => Recipe, (recipe) => recipe.category)
   recipes: Recipe[];
 
