@@ -1,4 +1,4 @@
-import { IsString, IsInt, Min, IsBoolean } from 'class-validator';
+import { IsString, IsInt, Min, IsBoolean, IsOptional } from 'class-validator';
 
 export class CreateRecipeDto {
   @IsString()
@@ -13,4 +13,12 @@ export class CreateRecipeDto {
   @IsInt()
   @Min(0)
   preparationTime: number;
+
+  @IsString()
+  @IsOptional()
+  imageUrl: string;
+
+  @IsString()
+  @IsOptional()
+  comments: string;
 }
