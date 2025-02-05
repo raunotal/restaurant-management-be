@@ -37,7 +37,7 @@ export class RecipeService {
   async findOne(id: string) {
     this.logger.log(`Finding recipe ${id}`);
 
-    return this.recipesRepository.findOneById(id);
+    return this.recipesRepository.findOne({ where: { id }, relations: ['category'] });
   }
 
   async update(id: string, updateRecipeDto: UpdateRecipeDto) {
