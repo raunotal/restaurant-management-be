@@ -51,6 +51,8 @@ export class RecipeService {
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} recipe`;
+    this.logger.log(`Removing recipe ${id}`);
+
+    return this.recipesRepository.remove(id);
   }
 }
