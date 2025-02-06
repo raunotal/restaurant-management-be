@@ -19,7 +19,7 @@ export class RecipeController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.recipeService.findOne(+id);
+    return this.recipeService.findOne(id);
   }
 
   @Patch(':id')
@@ -29,6 +29,6 @@ export class RecipeController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.recipeService.remove(+id);
+    return this.recipeService.remove(id);
   }
 }

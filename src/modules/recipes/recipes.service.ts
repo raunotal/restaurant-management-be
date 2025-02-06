@@ -34,8 +34,10 @@ export class RecipeService {
     return `This action returns all recipe`;
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} recipe`;
+  async findOne(id: string) {
+    this.logger.log(`Finding recipe ${id}`);
+
+    return this.recipesRepository.findOne({ where: { id }, relations: ['category'] });
   }
 
   async update(id: string, updateRecipeDto: UpdateRecipeDto) {
@@ -48,7 +50,9 @@ export class RecipeService {
     return this.recipesRepository.update(id, recipe);
   }
 
-  async remove(id: number) {
-    return `This action removes a #${id} recipe`;
+  async remove(id: string) {
+    this.logger.log(`Removing recipe ${id}`);
+
+    return this.recipesRepository.remove(id);
   }
 }
