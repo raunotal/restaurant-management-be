@@ -31,7 +31,9 @@ export class RecipeService {
   }
 
   async findAll() {
-    return `This action returns all recipe`;
+    this.logger.log('Finding all recipes');
+
+    return this.recipesRepository.findAll({ relations: ['category'] });
   }
 
   async findOne(id: string) {
