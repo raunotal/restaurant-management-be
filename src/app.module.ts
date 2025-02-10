@@ -6,6 +6,7 @@ import { UnitsModule } from './modules/units/units.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { IngredientCategoriesModule } from './modules/ingredient-categories/ingredient-categories.module';
 import { RecipeModule } from './modules/recipes/recipes.module';
+import { IngredientsModule } from './modules/ingredients/ingredients.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { RecipeModule } from './modules/recipes/recipes.module';
     SuppliersModule,
     IngredientCategoriesModule,
     RecipeModule,
+    IngredientsModule,
   ],
   controllers: [],
   providers: [],
