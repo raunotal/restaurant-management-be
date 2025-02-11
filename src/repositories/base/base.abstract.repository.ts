@@ -6,15 +6,39 @@ import {
   Repository,
 } from 'typeorm';
 import { IBaseRepository } from './base.interface.repository';
+import { JwtUtilsService } from 'src/common/services/jwt-utils.service';
+import { RequestContextService } from 'src/common/services/request-context.service';
+import { Inject } from '@nestjs/common';
 
 interface HasId {
   id: string;
+  createdBy?: string;
+  updatedBy?: string;
 }
 
 export abstract class BaseRepository<T extends HasId> implements IBaseRepository<T> {
+  @Inject(RequestContextService)
+  private readonly requestContextService: RequestContextService;
+
+  @Inject(JwtUtilsService)
+  private readonly jwtUtilsService: JwtUtilsService;
+
   constructor(private readonly repository: Repository<T>) {}
 
+  private getNameFromToken(): string {
+    const token = this.requestContextService.getToken();
+    console.log('base repo token', token);
+
+    if (!token) return 'system';
+
+    const decodedToken = this.jwtUtilsService.decodeToken(token);
+    return decodedToken.name || 'system';
+  }
+
   async create(entity: DeepPartial<T>): Promise<T> {
+    const name = this.getNameFromToken();
+    entity.createdBy = name;
+    entity.updatedBy = name;
     return this.repository.save(entity);
   }
 
@@ -36,6 +60,7 @@ export abstract class BaseRepository<T extends HasId> implements IBaseRepository
     if (!item) {
       throw new Error('Item not found');
     }
+    entity.updatedBy = this.getNameFromToken();
     return await this.repository.save(entity);
   }
 
