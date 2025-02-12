@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateIngredientDto {
   @IsString()
@@ -32,5 +32,8 @@ export class CreateIngredientDto {
   comments: string;
 
   @IsString()
+  unitId: string;
+
+  @IsBoolean()
   isActive: boolean;
 }

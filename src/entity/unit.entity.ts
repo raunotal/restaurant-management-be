@@ -3,6 +3,7 @@ import { BaseEntity } from './base/base.entity';
 import { RecipeIngredient } from './recipe-ingredient.entity';
 import { RecipeRecipe } from './recipe-recipe.entity';
 import { IsNotEmpty } from 'class-validator';
+import { Ingredient } from './ingredient.entity';
 
 @Entity('units')
 export class Unit extends BaseEntity {
@@ -27,6 +28,9 @@ export class Unit extends BaseEntity {
 
   @OneToMany(() => RecipeRecipe, (recipeRecipe) => recipeRecipe.unit)
   recipeRecipes: RecipeRecipe[];
+
+  @OneToMany(() => Ingredient, (ingredient) => ingredient.unit)
+  ingredients: Ingredient[];
 
   constructor(partial: Partial<Unit>) {
     super();

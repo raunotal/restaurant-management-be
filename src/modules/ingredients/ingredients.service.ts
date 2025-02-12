@@ -7,6 +7,9 @@ import { IngredientCategoryRepository } from 'src/repositories/ingredient-catego
 import { IIngredientCategoryRepository } from 'src/repositories/interfaces/ingredient-category.interface';
 import { SupplierRepository } from 'src/repositories/supplier.repository';
 import { ISupplierRepository } from 'src/repositories/interfaces/supplier.interface';
+import { IUnitRepository } from 'src/repositories/interfaces/unit.interface';
+import { UnitRepository } from 'src/repositories/unit.repository';
+import { Ingredient } from 'src/entity/ingredient.entity';
 
 @Injectable()
 export class IngredientsService {
@@ -18,7 +21,9 @@ export class IngredientsService {
     @Inject(IngredientCategoryRepository)
     private readonly ingredientCategoryRepository: IIngredientCategoryRepository,
     @Inject(SupplierRepository)
-    private readonly supplierRepository: ISupplierRepository
+    private readonly supplierRepository: ISupplierRepository,
+    @Inject(UnitRepository)
+    private readonly unitRepository: IUnitRepository
   ) {}
 
   async create(createIngredientDto: CreateIngredientDto) {
@@ -26,15 +31,18 @@ export class IngredientsService {
       createIngredientDto,
     });
 
-    const ingredientCategory = await this.ingredientCategoryRepository.findOneById(
+    const ingredient = new Ingredient(createIngredientDto);
+    const category = await this.ingredientCategoryRepository.findOneById(
       createIngredientDto.categoryId
     );
     const supplier = await this.supplierRepository.findOneById(createIngredientDto.supplierId);
+    const unit = await this.unitRepository.findOneById(createIngredientDto.unitId);
 
     return this.ingredientsRepository.create({
-      ...createIngredientDto,
-      category: ingredientCategory,
+      ...ingredient,
+      category,
       supplier,
+      unit,
     });
   }
 
