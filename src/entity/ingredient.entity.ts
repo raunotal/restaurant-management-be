@@ -10,10 +10,10 @@ export class Ingredient extends BaseEntity {
   @Column()
   name: string;
 
-  @Column({ nullable: true })
+  @Column('float', { nullable: true })
   grossQuantity: number;
 
-  @Column({ nullable: true })
+  @Column('float', { nullable: true })
   netQuantity: number;
 
   @ManyToOne(() => Unit, (unit) => unit.ingredients, { nullable: true })
