@@ -64,15 +64,17 @@ export class IngredientsService {
   async update(id: string, updateIngredientDto: UpdateIngredientDto) {
     this.logger.log(`Updating ingredient ${id}`, { updateIngredientDto });
 
-    const ingredientCategory = await this.ingredientCategoryRepository.findOneById(
+    const category = await this.ingredientCategoryRepository.findOneById(
       updateIngredientDto.categoryId
     );
     const supplier = await this.supplierRepository.findOneById(updateIngredientDto.supplierId);
+    const unit = await this.unitRepository.findOneById(updateIngredientDto.unitId);
 
     return this.ingredientsRepository.update(id, {
       ...updateIngredientDto,
-      category: ingredientCategory,
+      category,
       supplier,
+      unit,
     });
   }
 
