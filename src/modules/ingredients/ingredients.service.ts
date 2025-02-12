@@ -49,7 +49,7 @@ export class IngredientsService {
   async findAll() {
     this.logger.log('Finding all ingredients');
 
-    return this.ingredientsRepository.findAll({ relations: ['category', 'supplier'] });
+    return this.ingredientsRepository.findAll({ relations: ['category', 'supplier', 'unit'] });
   }
 
   async findOne(id: string) {
@@ -57,7 +57,7 @@ export class IngredientsService {
 
     return this.ingredientsRepository.findOne({
       where: { id },
-      relations: ['category', 'supplier'],
+      relations: ['category', 'supplier', 'unit'],
     });
   }
 

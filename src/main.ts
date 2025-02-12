@@ -16,9 +16,15 @@ async function bootstrap() {
   const logger = new Logger('Application');
   logger.verbose(`Server is running on ${process.env.PORT}`);
 
-  app.enableCors({
-    origin: '*',
-  });
+  if (process.env.NODE_ENV === 'development') {
+    app.enableCors();
+  } else {
+    app.enableCors({
+      origin: process.env.FRONTEND_URL,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true,
+    });
+  }
 
   await app.listen(process.env.PORT);
 }
