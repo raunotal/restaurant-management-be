@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { QueryFailedExceptionFilter } from './filters/query-failed.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,13 +12,19 @@ async function bootstrap() {
       transform: true,
     })
   );
-  app.useGlobalFilters(new QueryFailedExceptionFilter());
+
   const logger = new Logger('Application');
   logger.verbose(`Server is running on ${process.env.PORT}`);
 
-  app.enableCors({
-    origin: '*',
-  });
+  if (process.env.NODE_ENV === 'development') {
+    app.enableCors();
+  } else {
+    app.enableCors({
+      origin: process.env.FRONTEND_URL,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true,
+    });
+  }
 
   await app.listen(process.env.PORT);
 }

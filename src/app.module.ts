@@ -6,6 +6,7 @@ import { UnitsModule } from './modules/units/units.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { IngredientCategoriesModule } from './modules/ingredient-categories/ingredient-categories.module';
 import { RecipeModule } from './modules/recipes/recipes.module';
+import { IngredientsModule } from './modules/ingredients/ingredients.module';
 import { TokenExtractorMiddleware } from './common/middleware/token-extractor.middleware';
 import { CommonModule } from './common/modules/common.module';
 
@@ -21,6 +22,7 @@ import { CommonModule } from './common/modules/common.module';
     SuppliersModule,
     IngredientCategoriesModule,
     RecipeModule,
+    IngredientsModule,
   ],
   controllers: [],
   providers: [],

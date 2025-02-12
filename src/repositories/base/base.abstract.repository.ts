@@ -27,7 +27,6 @@ export abstract class BaseRepository<T extends HasId> implements IBaseRepository
 
   private getNameFromToken(): string {
     const token = this.requestContextService.getToken();
-    console.log('base repo token', token);
 
     if (!token) return 'system';
 
