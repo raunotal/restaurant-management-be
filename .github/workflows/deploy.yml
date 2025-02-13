@@ -35,7 +35,7 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd ~/app/backend
+            cd ~/app/restaurant-management-be
             git pull origin main
             cd ~/app
-            docker-compose up -d --build backend
+            docker-compose up -d --build restaurant-management-be
