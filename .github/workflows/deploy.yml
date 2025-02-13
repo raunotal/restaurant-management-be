@@ -3,6 +3,25 @@ name: Deploy Backend
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 
 jobs:
   deploy:
@@ -16,7 +35,7 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd ~/myapp/backend
+            cd ~/app/backend
             git pull origin main
-            cd ~/myapp
+            cd ~/app
             docker-compose up -d --build backend
