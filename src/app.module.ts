@@ -9,6 +9,8 @@ import { RecipeModule } from './modules/recipes/recipes.module';
 import { IngredientsModule } from './modules/ingredients/ingredients.module';
 import { TokenExtractorMiddleware } from './common/middleware/token-extractor.middleware';
 import { CommonModule } from './common/modules/common.module';
+import { IngredientWarehousesModule } from './src/modules/ingredient-warehouses/ingredient-warehouses.module';
+import { IngredientWarehousesModule } from './modules/ingredient-warehouses/ingredient-warehouses.module';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { CommonModule } from './common/modules/common.module';
     IngredientCategoriesModule,
     RecipeModule,
     IngredientsModule,
+    IngredientWarehousesModule,
   ],
   controllers: [],
   providers: [],
