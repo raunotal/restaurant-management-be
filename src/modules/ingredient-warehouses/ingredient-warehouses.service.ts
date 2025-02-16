@@ -17,6 +17,8 @@ export class IngredientWarehousesService {
     this.logger.log(`Creating ingredientWarehouse ${createIngredientWarehouseDto.name}`, {
       createIngredientWarehouseDto,
     });
+
+    return this.ingredientWarehouseRepository.create(createIngredientWarehouseDto);
   }
 
   async findAll() {
