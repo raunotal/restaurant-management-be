@@ -19,16 +19,19 @@ export class IngredientWarehousesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.ingredientWarehousesService.findOne(+id);
+    return this.ingredientWarehousesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateIngredientWarehouseDto: UpdateIngredientWarehouseDto) {
-    return this.ingredientWarehousesService.update(+id, updateIngredientWarehouseDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateIngredientWarehouseDto: UpdateIngredientWarehouseDto
+  ) {
+    return this.ingredientWarehousesService.update(id, updateIngredientWarehouseDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.ingredientWarehousesService.remove(+id);
+    return this.ingredientWarehousesService.remove(id);
   }
 }
