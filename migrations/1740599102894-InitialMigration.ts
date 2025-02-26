@@ -1,12 +1,13 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class YourMigrationName1739637371851 implements MigrationInterface {
-    name = 'YourMigrationName1739637371851'
+export class InitialMigration1740599102894 implements MigrationInterface {
+    name = 'InitialMigration1740599102894'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "ingredient_categories" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "name" character varying NOT NULL, "description" character varying, CONSTRAINT "PK_c8efa29d4848b2abaea47237a87" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "suppliers" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "name" character varying NOT NULL, "address" character varying, CONSTRAINT "PK_b70ac51766a9e3144f778cfe81e" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "ingredients" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "name" character varying NOT NULL, "grossQuantity" double precision, "netQuantity" double precision, "purchasePrice" double precision, "imageUrl" character varying, "comments" character varying, "isActive" boolean NOT NULL, "unitId" uuid, "categoryId" uuid, "supplierId" uuid, CONSTRAINT "PK_9240185c8a5507251c9f15e0649" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "ingredient_warehouses" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "name" character varying NOT NULL, "description" character varying, CONSTRAINT "PK_a5c3faa4afe0d982f7eba6ad57c" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "ingredients" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "name" character varying NOT NULL, "grossQuantity" double precision, "netQuantity" double precision, "purchasePrice" double precision, "imageUrl" character varying, "comments" character varying, "isActive" boolean NOT NULL, "unitId" uuid, "categoryId" uuid, "supplierId" uuid, "warehouseId" uuid, CONSTRAINT "PK_9240185c8a5507251c9f15e0649" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "recipe_categories" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "name" character varying NOT NULL, "description" character varying, CONSTRAINT "PK_d2c6cdb5aca8199edabe4e4f08d" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "recipe_recipes" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "quantity" integer NOT NULL, "comments" character varying, "recipeId" uuid, "inRecipeId" uuid, "unitId" uuid, CONSTRAINT "PK_c602668ba73eeb4a6e579acac00" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "stages" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "createdBy" character varying NOT NULL DEFAULT 'system', "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedBy" character varying NOT NULL DEFAULT 'system', "name" character varying NOT NULL, CONSTRAINT "PK_16efa0f8f5386328944769b9e6d" PRIMARY KEY ("id"))`);
@@ -17,6 +18,7 @@ export class YourMigrationName1739637371851 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "ingredients" ADD CONSTRAINT "FK_1cf19bd84e13a2a90f6e54be3ee" FOREIGN KEY ("unitId") REFERENCES "units"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "ingredients" ADD CONSTRAINT "FK_8f7060de1f9dc5d70ed029a1747" FOREIGN KEY ("categoryId") REFERENCES "ingredient_categories"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "ingredients" ADD CONSTRAINT "FK_c647395028351795765fefe6a3d" FOREIGN KEY ("supplierId") REFERENCES "suppliers"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "ingredients" ADD CONSTRAINT "FK_4c003bd27a14fa93481c04c17ac" FOREIGN KEY ("warehouseId") REFERENCES "ingredient_warehouses"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "recipe_recipes" ADD CONSTRAINT "FK_cce2f92c8b3e0cc64bcf31fee8a" FOREIGN KEY ("recipeId") REFERENCES "recipes"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "recipe_recipes" ADD CONSTRAINT "FK_8f6f1a884b6be3af812ec51163f" FOREIGN KEY ("inRecipeId") REFERENCES "recipes"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "recipe_recipes" ADD CONSTRAINT "FK_d5d3f89f4957b197feec28ac940" FOREIGN KEY ("unitId") REFERENCES "units"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
@@ -40,6 +42,7 @@ export class YourMigrationName1739637371851 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "recipe_recipes" DROP CONSTRAINT "FK_d5d3f89f4957b197feec28ac940"`);
         await queryRunner.query(`ALTER TABLE "recipe_recipes" DROP CONSTRAINT "FK_8f6f1a884b6be3af812ec51163f"`);
         await queryRunner.query(`ALTER TABLE "recipe_recipes" DROP CONSTRAINT "FK_cce2f92c8b3e0cc64bcf31fee8a"`);
+        await queryRunner.query(`ALTER TABLE "ingredients" DROP CONSTRAINT "FK_4c003bd27a14fa93481c04c17ac"`);
         await queryRunner.query(`ALTER TABLE "ingredients" DROP CONSTRAINT "FK_c647395028351795765fefe6a3d"`);
         await queryRunner.query(`ALTER TABLE "ingredients" DROP CONSTRAINT "FK_8f7060de1f9dc5d70ed029a1747"`);
         await queryRunner.query(`ALTER TABLE "ingredients" DROP CONSTRAINT "FK_1cf19bd84e13a2a90f6e54be3ee"`);
@@ -51,6 +54,7 @@ export class YourMigrationName1739637371851 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "recipe_recipes"`);
         await queryRunner.query(`DROP TABLE "recipe_categories"`);
         await queryRunner.query(`DROP TABLE "ingredients"`);
+        await queryRunner.query(`DROP TABLE "ingredient_warehouses"`);
         await queryRunner.query(`DROP TABLE "suppliers"`);
         await queryRunner.query(`DROP TABLE "ingredient_categories"`);
     }

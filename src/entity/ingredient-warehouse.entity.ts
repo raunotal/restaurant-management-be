@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from './base/base.entity';
 import { Ingredient } from './ingredient.entity';
 
-@Entity('ingredient_warehouse')
+@Entity('ingredient_warehouses')
 export class IngredientWarehouse extends BaseEntity {
   @Column()
   name: string;
