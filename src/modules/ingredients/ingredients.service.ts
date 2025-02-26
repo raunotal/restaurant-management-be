@@ -10,6 +10,8 @@ import { ISupplierRepository } from 'src/repositories/interfaces/supplier.interf
 import { IUnitRepository } from 'src/repositories/interfaces/unit.interface';
 import { UnitRepository } from 'src/repositories/unit.repository';
 import { Ingredient } from 'src/entity/ingredient.entity';
+import { IngredientWarehouseRepository } from 'src/repositories/ingredient-warehouse.repository';
+import { IIngredientWarehouseRepository } from 'src/repositories/interfaces/ingredient-warehouse.interface';
 
 @Injectable()
 export class IngredientsService {
@@ -23,7 +25,9 @@ export class IngredientsService {
     @Inject(SupplierRepository)
     private readonly supplierRepository: ISupplierRepository,
     @Inject(UnitRepository)
-    private readonly unitRepository: IUnitRepository
+    private readonly unitRepository: IUnitRepository,
+    @Inject(IngredientWarehouseRepository)
+    private readonly ingredientWarehouseRepository: IIngredientWarehouseRepository
   ) {}
 
   async create(createIngredientDto: CreateIngredientDto) {
@@ -37,12 +41,18 @@ export class IngredientsService {
     );
     const supplier = await this.supplierRepository.findOneById(createIngredientDto.supplierId);
     const unit = await this.unitRepository.findOneById(createIngredientDto.unitId);
+    const warehouse = await this.ingredientWarehouseRepository.findOneById(
+      createIngredientDto.warehouseId
+    );
+
+    console.log('warehouse', warehouse);
 
     return this.ingredientsRepository.create({
       ...ingredient,
       category,
       supplier,
       unit,
+      warehouse,
     });
   }
 
@@ -57,7 +67,7 @@ export class IngredientsService {
 
     return this.ingredientsRepository.findOne({
       where: { id },
-      relations: ['category', 'supplier', 'unit'],
+      relations: ['category', 'supplier', 'unit', 'warehouse'],
     });
   }
 
@@ -69,12 +79,15 @@ export class IngredientsService {
     );
     const supplier = await this.supplierRepository.findOneById(updateIngredientDto.supplierId);
     const unit = await this.unitRepository.findOneById(updateIngredientDto.unitId);
-
+    const warehouse = await this.ingredientWarehouseRepository.findOneById(
+      updateIngredientDto.warehouseId
+    );
     return this.ingredientsRepository.update(id, {
       ...updateIngredientDto,
       category,
       supplier,
       unit,
+      warehouse,
     });
   }
 
