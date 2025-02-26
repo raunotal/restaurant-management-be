@@ -10,9 +10,13 @@ import { SupplierRepository } from 'src/repositories/supplier.repository';
 import { IngredientRepository } from 'src/repositories/ingredient.repository';
 import { UnitRepository } from 'src/repositories/unit.repository';
 import { Unit } from 'src/entity/unit.entity';
+import { IngredientWarehouse } from 'src/entity/ingredient-warehouse.entity';
+import { IngredientWarehouseRepository } from 'src/repositories/ingredient-warehouse.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Ingredient, IngredientCategory, Supplier, Unit])],
+  imports: [
+    TypeOrmModule.forFeature([Ingredient, IngredientCategory, Supplier, Unit, IngredientWarehouse]),
+  ],
   controllers: [IngredientsController],
   providers: [
     IngredientsService,
@@ -20,6 +24,7 @@ import { Unit } from 'src/entity/unit.entity';
     IngredientCategoryRepository,
     SupplierRepository,
     UnitRepository,
+    IngredientWarehouseRepository,
   ],
 })
 export class IngredientsModule {}
