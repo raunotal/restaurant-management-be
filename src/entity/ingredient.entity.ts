@@ -4,6 +4,7 @@ import { IngredientCategory } from './ingredient-category.entity';
 import { Supplier } from './supplier.entity';
 import { RecipeIngredient } from './recipe-ingredient.entity';
 import { Unit } from './unit.entity';
+import { IngredientWarehouse } from './ingredient-warehouse.entity';
 
 @Entity('ingredients')
 export class Ingredient extends BaseEntity {
@@ -36,6 +37,9 @@ export class Ingredient extends BaseEntity {
 
   @ManyToOne(() => Supplier, (supplier) => supplier.ingredients, { nullable: true })
   supplier: Supplier | null;
+
+  @ManyToOne(() => IngredientWarehouse, (warehouse) => warehouse.ingredients, { nullable: true })
+  warehouse: IngredientWarehouse | null;
 
   @OneToMany(() => RecipeIngredient, (recipeIngredient) => recipeIngredient.ingredient)
   recipes: RecipeIngredient[];

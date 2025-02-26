@@ -25,6 +25,10 @@ export class CreateIngredientDto {
 
   @IsString()
   @IsOptional()
+  warehouseId: string;
+
+  @IsString()
+  @IsOptional()
   imageUrl: string;
 
   @IsString()
