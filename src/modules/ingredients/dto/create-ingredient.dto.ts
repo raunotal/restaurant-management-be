@@ -16,6 +16,10 @@ export class CreateIngredientDto {
   @IsOptional()
   purchasePrice: number;
 
+  @IsNumber({ maxDecimalPlaces: 6 })
+  @IsOptional()
+  warehouseMinQuantity: number;
+
   @IsString()
   categoryId: string;
 
