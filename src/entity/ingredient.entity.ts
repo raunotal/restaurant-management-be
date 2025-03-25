@@ -35,6 +35,9 @@ export class Ingredient extends BaseEntity {
   @Column()
   isActive: boolean;
 
+  @Column({ nullable: true })
+  bulkPackage: string;
+
   @ManyToOne(() => IngredientCategory, (category) => category.ingredients, { nullable: true })
   category: IngredientCategory | null;
 

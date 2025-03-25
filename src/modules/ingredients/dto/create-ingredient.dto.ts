@@ -44,4 +44,8 @@ export class CreateIngredientDto {
 
   @IsBoolean()
   isActive: boolean;
+
+  @IsString()
+  @IsOptional()
+  bulkPackage: string;
 }
