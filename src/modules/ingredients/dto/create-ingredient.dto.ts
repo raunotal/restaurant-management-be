@@ -48,4 +48,8 @@ export class CreateIngredientDto {
   @IsString()
   @IsOptional()
   bulkPackage: string;
+
+  @IsString()
+  @IsOptional()
+  shelfLife: string;
 }
