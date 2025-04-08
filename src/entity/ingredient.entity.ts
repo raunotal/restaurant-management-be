@@ -41,6 +41,9 @@ export class Ingredient extends BaseEntity {
   @Column({ nullable: true })
   shelfLife: string;
 
+  @Column({ nullable: true })
+  productCode: string;
+
   @ManyToOne(() => IngredientCategory, (category) => category.ingredients, { nullable: true })
   category: IngredientCategory | null;
 
