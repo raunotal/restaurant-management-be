@@ -52,4 +52,8 @@ export class CreateIngredientDto {
   @IsString()
   @IsOptional()
   shelfLife: string;
+
+  @IsString()
+  @IsOptional()
+  productCode: string;
 }
