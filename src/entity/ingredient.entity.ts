@@ -17,11 +17,8 @@ export class Ingredient extends BaseEntity {
   @Column('float', { nullable: true })
   netQuantity: number;
 
-  @Column('float', { nullable: true })
-  warehouseMinQuantity: number;
-
   @Column({ nullable: true })
-  warehouseMinQuantityDescription: string;
+  warehouseMinQuantity: string;
 
   @ManyToOne(() => Unit, (unit) => unit.ingredients, { nullable: true })
   unit: Unit;
