@@ -21,6 +21,10 @@ export class CreateIngredientDto {
   warehouseMinQuantity: number;
 
   @IsString()
+  @IsOptional()
+  warehouseMinQuantityDescription: string;
+
+  @IsString()
   categoryId: string;
 
   @IsString()
