@@ -10,6 +10,12 @@ export class Supplier extends BaseEntity {
   @Column({ nullable: true })
   address: string;
 
+  @Column({ nullable: true })
+  contact: string;
+
+  @Column({ nullable: true })
+  deliveryTerms: string;
+
   @OneToMany(() => Ingredient, (ingredient) => ingredient.supplier)
   ingredients: Ingredient[];
 
