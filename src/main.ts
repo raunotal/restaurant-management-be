@@ -16,7 +16,16 @@ async function bootstrap() {
   const logger = new Logger('Application');
   logger.verbose(`Server is running on ${process.env.PORT}`);
 
-  app.enableCors({ origin: '*' });
+  const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',')
+    .map((origin) => origin.trim())
+    .filter((origin) => origin.length > 0);
+
+  app.enableCors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  });
 
   await app.listen(process.env.PORT, '0.0.0.0');
 }

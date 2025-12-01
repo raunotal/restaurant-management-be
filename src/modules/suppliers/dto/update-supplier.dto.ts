@@ -10,4 +10,12 @@ export class UpdateSupplierDto {
   @IsString()
   @IsOptional()
   address: string;
+
+  @IsString()
+  @IsOptional()
+  contact: string;
+
+  @IsString()
+  @IsOptional()
+  deliveryTerms: string;
 }
