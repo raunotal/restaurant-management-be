@@ -17,6 +17,9 @@ export class Ingredient extends BaseEntity {
   @Column('float', { nullable: true })
   netQuantity: number;
 
+  @Column('float', { nullable: true })
+  coldProcessingLoss: number;
+
   @Column({ nullable: true })
   warehouseMinQuantity: string;
 

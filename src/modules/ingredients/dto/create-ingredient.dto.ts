@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class CreateIngredientDto {
   @IsString()
@@ -11,6 +11,12 @@ export class CreateIngredientDto {
   @IsNumber({ maxDecimalPlaces: 6 })
   @IsOptional()
   netQuantity: number;
+
+  @IsNumber({ maxDecimalPlaces: 6 })
+  @Min(0)
+  @Max(100)
+  @IsOptional()
+  coldProcessingLoss: number;
 
   @IsNumber({ maxDecimalPlaces: 6 })
   @IsOptional()
