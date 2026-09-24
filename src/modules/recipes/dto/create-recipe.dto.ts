@@ -10,6 +10,10 @@ export class CreateRecipeDto {
   @IsString()
   categoryId: string;
 
+  @IsString()
+  @IsOptional()
+  productGroupId?: string;
+
   @IsInt()
   @Min(0)
   preparationTime: number;

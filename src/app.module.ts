@@ -2,6 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { RecipeCategoriesModule } from './modules/recipe-categories/recipe-categories.module';
+import { RecipeProductGroupsModule } from './modules/recipe-product-groups/recipe-product-groups.module';
 import { UnitsModule } from './modules/units/units.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { IngredientCategoriesModule } from './modules/ingredient-categories/ingredient-categories.module';
@@ -20,6 +21,7 @@ import { IngredientWarehousesModule } from './modules/ingredient-warehouses/ingr
     DatabaseModule,
     UnitsModule,
     RecipeCategoriesModule,
+    RecipeProductGroupsModule,
     SuppliersModule,
     IngredientCategoriesModule,
     RecipeModule,
