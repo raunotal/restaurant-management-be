@@ -5,6 +5,8 @@ import { IngredientRepository } from 'src/repositories/ingredient.repository';
 import { IIngredientRepository } from 'src/repositories/interfaces/ingredient.interface';
 import { IngredientCategoryRepository } from 'src/repositories/ingredient-categories.repository';
 import { IIngredientCategoryRepository } from 'src/repositories/interfaces/ingredient-category.interface';
+import { IngredientProductGroupRepository } from 'src/repositories/ingredient-product-group.repository';
+import { IIngredientProductGroupRepository } from 'src/repositories/interfaces/ingredient-product-group.interface';
 import { SupplierRepository } from 'src/repositories/supplier.repository';
 import { ISupplierRepository } from 'src/repositories/interfaces/supplier.interface';
 import { IUnitRepository } from 'src/repositories/interfaces/unit.interface';
@@ -22,6 +24,8 @@ export class IngredientsService {
     private readonly ingredientsRepository: IIngredientRepository,
     @Inject(IngredientCategoryRepository)
     private readonly ingredientCategoryRepository: IIngredientCategoryRepository,
+    @Inject(IngredientProductGroupRepository)
+    private readonly ingredientProductGroupRepository: IIngredientProductGroupRepository,
     @Inject(SupplierRepository)
     private readonly supplierRepository: ISupplierRepository,
     @Inject(UnitRepository)
@@ -39,6 +43,7 @@ export class IngredientsService {
     const category = await this.ingredientCategoryRepository.findOneById(
       createIngredientDto.categoryId
     );
+    const productGroup = await this.findProductGroup(createIngredientDto.productGroupId);
     const supplier = await this.supplierRepository.findOneById(createIngredientDto.supplierId);
     const unit = await this.unitRepository.findOneById(createIngredientDto.unitId);
     const warehouse = await this.ingredientWarehouseRepository.findOneById(
@@ -50,6 +55,7 @@ export class IngredientsService {
     return this.ingredientsRepository.create({
       ...ingredient,
       category,
+      productGroup,
       supplier,
       unit,
       warehouse,
@@ -60,7 +66,7 @@ export class IngredientsService {
     this.logger.log('Finding all ingredients');
 
     return this.ingredientsRepository.findAll({
-      relations: ['category', 'supplier', 'unit', 'warehouse'],
+      relations: ['category', 'productGroup', 'supplier', 'unit', 'warehouse'],
     });
   }
 
@@ -69,7 +75,7 @@ export class IngredientsService {
 
     return this.ingredientsRepository.findOne({
       where: { id },
-      relations: ['category', 'supplier', 'unit', 'warehouse'],
+      relations: ['category', 'productGroup', 'supplier', 'unit', 'warehouse'],
     });
   }
 
@@ -79,6 +85,7 @@ export class IngredientsService {
     const category = await this.ingredientCategoryRepository.findOneById(
       updateIngredientDto.categoryId
     );
+    const productGroup = await this.findProductGroup(updateIngredientDto.productGroupId);
     const supplier = await this.supplierRepository.findOneById(updateIngredientDto.supplierId);
     const unit = await this.unitRepository.findOneById(updateIngredientDto.unitId);
     const warehouse = await this.ingredientWarehouseRepository.findOneById(
@@ -87,6 +94,7 @@ export class IngredientsService {
     return this.ingredientsRepository.update(id, {
       ...updateIngredientDto,
       category,
+      productGroup,
       supplier,
       unit,
       warehouse,
@@ -97,5 +105,11 @@ export class IngredientsService {
     this.logger.log(`Removing ingredient ${id}`);
 
     return this.ingredientsRepository.remove(id);
+  }
+
+  private async findProductGroup(productGroupId?: string) {
+    if (!productGroupId) return null;
+
+    return this.ingredientProductGroupRepository.findOneById(productGroupId);
   }
 }

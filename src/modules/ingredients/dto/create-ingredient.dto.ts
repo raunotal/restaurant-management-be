@@ -31,6 +31,10 @@ export class CreateIngredientDto {
 
   @IsString()
   @IsOptional()
+  productGroupId: string;
+
+  @IsString()
+  @IsOptional()
   supplierId: string;
 
   @IsString()

@@ -6,6 +6,8 @@ import { IngredientCategory } from 'src/entity/ingredient-category.entity';
 import { Ingredient } from 'src/entity/ingredient.entity';
 import { Supplier } from 'src/entity/supplier.entity';
 import { IngredientCategoryRepository } from 'src/repositories/ingredient-categories.repository';
+import { IngredientProductGroup } from 'src/entity/ingredient-product-group.entity';
+import { IngredientProductGroupRepository } from 'src/repositories/ingredient-product-group.repository';
 import { SupplierRepository } from 'src/repositories/supplier.repository';
 import { IngredientRepository } from 'src/repositories/ingredient.repository';
 import { UnitRepository } from 'src/repositories/unit.repository';
@@ -15,13 +17,21 @@ import { IngredientWarehouseRepository } from 'src/repositories/ingredient-wareh
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Ingredient, IngredientCategory, Supplier, Unit, IngredientWarehouse]),
+    TypeOrmModule.forFeature([
+      Ingredient,
+      IngredientCategory,
+      IngredientProductGroup,
+      Supplier,
+      Unit,
+      IngredientWarehouse,
+    ]),
   ],
   controllers: [IngredientsController],
   providers: [
     IngredientsService,
     IngredientRepository,
     IngredientCategoryRepository,
+    IngredientProductGroupRepository,
     SupplierRepository,
     UnitRepository,
     IngredientWarehouseRepository,

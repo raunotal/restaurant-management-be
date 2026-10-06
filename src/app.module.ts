@@ -6,6 +6,7 @@ import { RecipeProductGroupsModule } from './modules/recipe-product-groups/recip
 import { UnitsModule } from './modules/units/units.module';
 import { SuppliersModule } from './modules/suppliers/suppliers.module';
 import { IngredientCategoriesModule } from './modules/ingredient-categories/ingredient-categories.module';
+import { IngredientProductGroupsModule } from './modules/ingredient-product-groups/ingredient-product-groups.module';
 import { RecipeModule } from './modules/recipes/recipes.module';
 import { IngredientsModule } from './modules/ingredients/ingredients.module';
 import { TokenExtractorMiddleware } from './common/middleware/token-extractor.middleware';
@@ -24,6 +25,7 @@ import { IngredientWarehousesModule } from './modules/ingredient-warehouses/ingr
     RecipeProductGroupsModule,
     SuppliersModule,
     IngredientCategoriesModule,
+    IngredientProductGroupsModule,
     RecipeModule,
     IngredientsModule,
     IngredientWarehousesModule,

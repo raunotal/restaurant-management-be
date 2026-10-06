@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './base/base.entity';
 import { IngredientCategory } from './ingredient-category.entity';
+import { IngredientProductGroup } from './ingredient-product-group.entity';
 import { Supplier } from './supplier.entity';
 import { RecipeIngredient } from './recipe-ingredient.entity';
 import { Unit } from './unit.entity';
@@ -49,6 +50,12 @@ export class Ingredient extends BaseEntity {
 
   @ManyToOne(() => IngredientCategory, (category) => category.ingredients, { nullable: true })
   category: IngredientCategory | null;
+
+  @ManyToOne(() => IngredientProductGroup, (productGroup) => productGroup.ingredients, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
+  productGroup: IngredientProductGroup | null;
 
   @ManyToOne(() => Supplier, (supplier) => supplier.ingredients, { nullable: true })
   supplier: Supplier | null;
